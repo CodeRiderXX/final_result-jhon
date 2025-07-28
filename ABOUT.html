@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - EduPaper</title>
+    <meta name="description" content="Learn about EduPaper's mission to help students and teachers create amazing academic papers." />
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>EduPaper</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link active">About</a></li>
+                <li><a href="generate.html" class="nav-link">Generate</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="about-hero">
+            <div class="container">
+                <h1 class="page-title">Empowering Education Through Innovation</h1>
+                <p class="page-subtitle">We believe every student deserves access to quality academic writing tools, and every teacher should have resources to guide their students effectively.</p>
+            </div>
+        </section>
+
+        <!-- Quote Section -->
+        <section class="quote-section">
+            <div class="container">
+                <blockquote class="main-quote">
+                    "We want to help students discover their potential, assist teachers in nurturing young minds, and create a bridge between academic excellence and accessibility. Education is the foundation of progress, and we're here to strengthen that foundation."
+                </blockquote>
+                <cite class="quote-author">- EduPaper Team</cite>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section class="mission">
+            <div class="container">
+                <div class="mission-grid">
+                    <div class="mission-card">
+                        <h3>For Students</h3>
+                        <p>We provide tools that help you express your ideas clearly, structure your thoughts effectively, and present your research professionally. Every student has unique insights worth sharing.</p>
+                    </div>
+                    <div class="mission-card">
+                        <h3>For Teachers</h3>
+                        <p>We support educators with resources to guide their students, provide consistent feedback, and maintain academic standards while encouraging creativity and critical thinking.</p>
+                    </div>
+                    <div class="mission-card">
+                        <h3>For Researchers</h3>
+                        <p>We offer advanced tools for academic professionals to streamline their writing process, maintain citation accuracy, and focus on what matters most - their research contributions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="values">
+            <div class="container">
+                <h2 class="section-title">Our Core Values</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">🎓</div>
+                        <h3>Academic Integrity</h3>
+                        <p>We promote honest academic practices and provide tools that enhance learning rather than replace it.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">🤝</div>
+                        <h3>Accessibility</h3>
+                        <p>Quality education tools should be available to everyone, regardless of their background or resources.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">💡</div>
+                        <h3>Innovation</h3>
+                        <p>We continuously evolve our platform to meet the changing needs of modern education.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">🌟</div>
+                        <h3>Excellence</h3>
+                        <p>We strive for the highest standards in everything we do, from our technology to our support.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>50K+</h3>
+                        <p>Papers Created</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>15K+</h3>
+                        <p>Students Helped</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>2K+</h3>
+                        <p>Teachers Supported</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>98%</h3>
+                        <p>Satisfaction Rate</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 EduPaper. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Question Paper Bot Section -->
+    <section class="bot-section" style="background:#f9f9f9; padding:2em 0;">
+        <div class="container">
+            <h2 class="section-title">Question Paper Bot</h2>
+            <form id="bot-form" style="max-width:400px;margin:auto;">
+                <div class="form-group">
+                    <label for="bot-topic">Enter Topic</label>
+                    <input type="text" id="bot-topic" name="bot-topic" placeholder="e.g. World History" required />
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Generate Questions</button>
+                <div id="bot-feedback" style="color:red; margin-top:10px; display:none;"></div>
+            </form>
+            <div id="bot-result" style="margin-top:2em;"></div>
+        </div>
+    </section>
+
+    <script>
+    document.getElementById('bot-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const topic = document.getElementById('bot-topic').value.trim();
+        const feedback = document.getElementById('bot-feedback');
+        const resultDiv = document.getElementById('bot-result');
+        feedback.style.display = 'none';
+        feedback.textContent = '';
+        resultDiv.innerHTML = '';
+        if (!topic) {
+            feedback.textContent = 'Please enter a topic.';
+            feedback.style.display = 'block';
+            return;
+        }
+        // Send request to backend
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/v1/papers', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ title: topic, content: topic, python_module: 'services' })
+            });
+            let data = {};
+            try {
+                data = await response.json();
+            } catch (err) {
+                feedback.textContent = 'Invalid server response.';
+                feedback.style.display = 'block';
+                return;
+            }
+            // Accept both data.result.questions and data.questions
+            let questions = [];
+            if (data.result && Array.isArray(data.result.questions)) {
+                questions = data.result.questions;
+            } else if (Array.isArray(data.questions)) {
+                questions = data.questions;
+            }
+            if (response.ok && questions.length > 0) {
+                let html = '<h3>Generated Questions:</h3><ul>';
+                for (const q of questions) {
+                    html += `<li>${q}</li>`;
+                }
+                html += '</ul>';
+                resultDiv.innerHTML = html;
+            } else {
+                feedback.textContent = data.msg || data.error || 'Could not generate questions.';
+                feedback.style.display = 'block';
+            }
+        } catch (error) {
+            feedback.textContent = 'Network error: ' + error.message;
+            feedback.style.display = 'block';
+        }
+    });
+    </script>
+</body>
+</html>

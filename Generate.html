@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Generate Paper - EduPaper</title>
+    <meta name="description" content="Create your academic paper with our AI-powered platform." />
+    <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>EduPaper</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="generate.html" class="nav-link active">Generate</a></li>
+            </ul>
+        </div>            
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="generate-hero">
+            <div class="container">
+                <h1 class="page-title">Create Your Academic Paper</h1>
+                <p class="page-subtitle">Choose from our specialized services to get the perfect paper for your needs</p>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="services">
+            <div class="container">
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">📝</div>
+                        <h3>Create Paper</h3>
+                        <p>Generate a complete academic paper with proper formatting, citations, and structure tailored to your grade level.</p>
+                        <ul class="service-features">
+                            <li>Professional formatting</li>
+                            <li>Proper citations</li>
+                            <li>Grade-appropriate content</li>
+                            <li>Multiple academic styles</li>
+                        </ul>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">💬</div>
+                        <h3>Consultation</h3>
+                        <p>Get personalized guidance from our academic experts to improve your writing and research skills.</p>
+                        <ul class="service-features">
+                            <li>One-on-one guidance</li>
+                            <li>Writing skill improvement</li>
+                            <li>Research methodology</li>
+                            <li>Academic best practices</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form Section -->
+        <section class="contact-form">
+            <div class="container">
+                <h2 class="section-title">Get Started Today</h2>
+                <form class="form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="python-module">Python Module</label>
+                        <select id="python-module" name="python-module" required>
+                            <option value="">Select Python Module</option>
+                            <option value="services">app/v1/services.py (AI Question Generator)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="file-topic">Topic</label>
+                        <input
+                            type="text"
+                            id="file-topic"
+                            name="file-topic"
+                            placeholder="Describe your topic"
+                            required
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="file-upload" class="custom-file-label">Attach File or Image (optional)</label>
+                        <input type="file" id="file-upload" name="file-upload" accept=".txt,.pdf,.doc,.docx,.png,.jpg,.jpeg,.bmp,.gif,.tiff,.webp" class="custom-file-input" style="display:none;" />
+                        <span id="file-upload-name" style="display:block; margin-top:8px; color:#e2e8f0; font-size:0.95em;"></span>
+                    </div>
+                    <script>
+                    // Custom file input logic
+                    const fileInput = document.getElementById('file-upload');
+                    const fileLabel = document.querySelector('label.custom-file-label');
+                    const fileNameSpan = document.getElementById('file-upload-name');
+                    fileLabel.style.cursor = 'pointer';
+                    fileLabel.onclick = function() { fileInput.click(); };
+                    fileInput.onchange = function() {
+                        if (fileInput.files.length > 0) {
+                            fileNameSpan.textContent = fileInput.files[0].name;
+                        } else {
+                            fileNameSpan.textContent = '';
+                        }
+                    };
+                    </script>
+                    <div class="form-group">
+                        <label for="grade-level">Grade Level</label>
+                        <select id="grade-level" name="grade-level" required>
+                            <option value="">Select Grade Level</option>
+                            <option value="elementary">Elementary School</option>
+                            <option value="middle">Middle School</option>
+                            <option value="high">High School</option>
+                            <option value="undergraduate">Undergraduate</option>
+                            <option value="graduate">Graduate</option>
+                            <option value="doctoral">Doctoral</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Service Type</label>
+                        <select id="service" name="service" required>
+                            <option value="">Select Service</option>
+                            <option value="create-paper">Create Paper</option>
+                            <option value="consultation">Consultation</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="timeline">Timeline</label>
+                        <select id="timeline" name="timeline" required>
+                            <option value="">Select Timeline</option>
+                            <option value="rush">Rush (1 hour)</option>
+                            <option value="standard">Standard (2 hours)</option>
+                            <option value="extended">Extended (3 hours)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="requirements">Special Requirements</label>
+                        <textarea
+                            id="requirements"
+                            name="requirements"
+                            rows="4"
+                            placeholder="Any specific requirements or instructions..."
+                        ></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Create Paper</button>
+                    <div id="form-feedback" style="color: red; margin-top: 10px; display: none;"></div>
+                    <div id="generated-questions" style="margin-top:2em;"></div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 EduPaper. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Script removed: now handled by generate.js -->
+<script src="generate.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Test /api/v1/papers endpoint with curl",
+			"command": "curl -X POST http://127.0.0.1:8000/api/v1/papers -H \"Content-Type: application/json\" -d \"{\\\"python_module\\\":\\\"services\\\",\\\"title\\\":\\\"Test Paper\\\",\\\"content\\\":\\\"This is the content for the paper.\\\",\\\"user_id\\\":1}\"",
+			"group": "test",
+			"problemMatcher": []
+		}
+	]
+}
